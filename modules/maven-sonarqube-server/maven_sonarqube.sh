@@ -214,7 +214,7 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # Update the package list to include Docker packages
-sudo apt update
+sudo apt update -y
 
 # Install Docker Engine
 sudo apt install -y docker-ce docker-ce-cli containerd.io

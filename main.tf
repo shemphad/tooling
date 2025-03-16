@@ -6,6 +6,15 @@ module "jenkins-server" {
   main-region   = var.main-region
 }
 
+module "s3-bucket" {
+  source  = "terraform-aws-modules/s3-bucket/aws"
+  version = "4.5.0"
+  bucket = var.bucket_name
+   versioning = {
+    enabled = true
+  }
+}
+
 module "terraform-node" {
   source        = "./modules/terraform-node"
   ami_id        = var.ami_id

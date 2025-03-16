@@ -81,6 +81,9 @@ variable "s3_bucket" {
   default     = "terraform-state-bucket-fusi"
 }
 
+variable "bucket_name" {
+  
+}
 variable "dynamodb_table" {
   description = "The name of the DynamoDB table for state locking"
   type        = string

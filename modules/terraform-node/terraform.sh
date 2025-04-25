@@ -2,7 +2,10 @@
 # Install Terraform
 echo "Installing java packages........"
 sudo apt-get update -y
+<<<<<<< HEAD
 sudo apt-get install unzip -y
+=======
+>>>>>>> d58be69 (first commit)
 sudo apt-get install openjdk-21-jdk -y
 
 #Installing aws cli
@@ -30,6 +33,10 @@ sudo apt-get install terraform -y
 #Installing kubectl client
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.12/2024-04-19/bin/linux/amd64/kubectl
 chmod +x ./kubectl
+<<<<<<< HEAD
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH 
 
 
+=======
+mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
+>>>>>>> d58be69 (first commit)

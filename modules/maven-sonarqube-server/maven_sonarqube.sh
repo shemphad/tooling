@@ -1,20 +1,26 @@
 #!/bin/bash
 
+<<<<<<< HEAD
 #Installing kubectl client
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.12/2024-04-19/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
 
 
+=======
+>>>>>>> d58be69 (first commit)
 # Update the package repository and install necessary dependencies
 sudo apt update -y
 sudo apt install -y wget unzip
 
+<<<<<<< HEAD
 #Installing aws cli
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
 
+=======
+>>>>>>> d58be69 (first commit)
 # Install Amazon Corretto 17 (Java 17)
 sudo apt install openjdk-17-jdk -y
 
@@ -41,6 +47,7 @@ echo "Verifying Maven installation..."
 
 # Download and install SonarQube 10.5.1.90531
 # Install Maven 3.9.6
+<<<<<<< HEAD
 # Download and install SonarQube 10.5.1.90531
 SONARQUBE_VERSION=10.5.1.90531
 sudo apt install unzip -y
@@ -49,6 +56,12 @@ if [ $? -ne 0 ]; then
     echo "Failed to download SonarQube. Exiting."
     exit 1
 fi
+=======
+LATEST_MAVEN_VERSION=3.9.6
+wget https://dlcdn.apache.org/maven/maven-3/${LATEST_MAVEN_VERSION}/binaries/apache-maven-${LATEST_MAVEN_VERSION}-bin.zip
+unzip -o apache-maven-${LATEST_MAVEN_VERSION}-bin.zip -d /opt
+sudo ln -sfn /opt/apache-maven-${LATEST_MAVEN_VERSION} /opt/maven
+>>>>>>> d58be69 (first commit)
 
 unzip -o sonarqube-${SONARQUBE_VERSION}.zip -d /opt
 sudo mv /opt/sonarqube-${SONARQUBE_VERSION} /opt/sonarqube
@@ -141,6 +154,7 @@ sudo systemctl start sonar.service
 sudo systemctl status sonar.service
 
 
+<<<<<<< HEAD
 
 # Update the system
 sudo apt update && sudo apt upgrade -y
@@ -162,11 +176,39 @@ server {
 
     location / {
         proxy_pass http://localhost:8080;
+=======
+#!/bin/bash
+
+# Variables
+DOMAIN="sonarqube.dominionsystem.org"
+EMAIL="fusisoft@gmail.com"  # Change to your email for Let's Encrypt notifications
+
+# Update package list and install dependencies
+sudo apt update
+sudo apt install -y nginx certbot python3-certbot-nginx
+
+# Start and enable NGINX service
+sudo systemctl start nginx
+sudo systemctl enable nginx
+
+# Allow NGINX in firewall
+sudo ufw allow 'Nginx Full'
+
+# Create an NGINX server block configuration for the domain
+sudo bash -c "cat > /etc/nginx/sites-available/$DOMAIN <<EOL
+server {
+    listen 80;
+    server_name $DOMAIN;
+    
+    location / {
+        proxy_pass http://127.0.0.1:9000; # Assuming SonarQube runs on port 9000
+>>>>>>> d58be69 (first commit)
         proxy_set_header Host \$host;
         proxy_set_header X-Real-IP \$remote_addr;
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto \$scheme;
     }
+<<<<<<< HEAD
 }
 EOL
 
@@ -235,3 +277,26 @@ echo "Docker installation completed successfully."
 echo "Please log out and log back in to apply group changes."
 
 
+=======
+
+    location ~ /.well-known/acme-challenge {
+        allow all;
+    }
+}
+EOL"
+
+# Enable the new site by creating a symbolic link
+sudo ln -s /etc/nginx/sites-available/$DOMAIN /etc/nginx/sites-enabled/
+
+# Test NGINX configuration
+sudo nginx -t
+
+# Reload NGINX to apply the changes
+sudo systemctl reload nginx
+
+# Obtain a Let's Encrypt SSL certificate for the domain using Certbot
+sudo certbot --nginx -d $DOMAIN --non-interactive --agree-tos --email $EMAIL --redirect
+
+# Verify Certbot automatic renewal process
+sudo systemctl status certbot.timer
+>>>>>>> d58be69 (first commit)

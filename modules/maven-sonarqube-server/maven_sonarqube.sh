@@ -1,26 +1,20 @@
 #!/bin/bash
 
-<<<<<<< HEAD
 #Installing kubectl client
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.12/2024-04-19/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
 
 
-=======
->>>>>>> d58be69 (first commit)
 # Update the package repository and install necessary dependencies
 sudo apt update -y
 sudo apt install -y wget unzip
 
-<<<<<<< HEAD
 #Installing aws cli
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
 
-=======
->>>>>>> d58be69 (first commit)
 # Install Amazon Corretto 17 (Java 17)
 sudo apt install openjdk-17-jdk -y
 
@@ -47,7 +41,6 @@ echo "Verifying Maven installation..."
 
 # Download and install SonarQube 10.5.1.90531
 # Install Maven 3.9.6
-<<<<<<< HEAD
 # Download and install SonarQube 10.5.1.90531
 SONARQUBE_VERSION=10.5.1.90531
 sudo apt install unzip -y
@@ -56,12 +49,6 @@ if [ $? -ne 0 ]; then
     echo "Failed to download SonarQube. Exiting."
     exit 1
 fi
-=======
-LATEST_MAVEN_VERSION=3.9.6
-wget https://dlcdn.apache.org/maven/maven-3/${LATEST_MAVEN_VERSION}/binaries/apache-maven-${LATEST_MAVEN_VERSION}-bin.zip
-unzip -o apache-maven-${LATEST_MAVEN_VERSION}-bin.zip -d /opt
-sudo ln -sfn /opt/apache-maven-${LATEST_MAVEN_VERSION} /opt/maven
->>>>>>> d58be69 (first commit)
 
 unzip -o sonarqube-${SONARQUBE_VERSION}.zip -d /opt
 sudo mv /opt/sonarqube-${SONARQUBE_VERSION} /opt/sonarqube

@@ -1,11 +1,7 @@
 variable "bucket" {
   description = "The name of the S3 bucket"
   type        = string
-<<<<<<< HEAD
   default     = "class38-terraform-backend-bucket"
-=======
-  default     = "dominion-terraform-backend-bucket"
->>>>>>> d58be69 (first commit)
 }
 
 variable "table" {

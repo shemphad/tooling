@@ -13,6 +13,7 @@ variable "table" {
 variable "region" {
   description = "The AWS region"
   type        = string
-  default     = "eu-west-1"
+  default     = "us-east-2"
 }
+
 

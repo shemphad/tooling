@@ -78,7 +78,7 @@ variable "subnet_id" {
 variable "s3_bucket" {
   description = "The name of the S3 bucket for storing Terraform state"
   type        = string
-  default     = "terraform-state-bucket-fusi"
+  default     = "terraform-state-bucket-general"
 }
 
 variable "bucket_name" {
@@ -93,5 +93,5 @@ variable "dynamodb_table" {
 variable "main-region" {
   description = "The AWS region to deploy resources"
   type        = string
-  default     = "us-west-2"
+  default     = "us-east-2"
 }
